@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "r8vL91vIen52gYNUaBK5PPtfnN67GzQ6wY02/AHDlfHssz+H8iatjHbjm+F9XpwDZXDl6i0HznWIGUCzTEwjcQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Jack\\local-repos\\dicentra-browser\\Dicentra\\Dicentra\\Dicentra.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jack\\.nuget\\packages\\microsoft.toolkit.forms.ui.controls.webview\\6.1.1\\microsoft.toolkit.forms.ui.controls.webview.6.1.1.nupkg.sha512",
+    "C:\\Users\\Jack\\.nuget\\packages\\microsoft.web.webview2\\0.9.538-prerelease\\microsoft.web.webview2.0.9.538-prerelease.nupkg.sha512",
+    "C:\\Users\\Jack\\.nuget\\packages\\microsoft.windows.sdk.contracts\\10.0.18362.2005\\microsoft.windows.sdk.contracts.10.0.18362.2005.nupkg.sha512",
+    "C:\\Users\\Jack\\.nuget\\packages\\system.runtime.windowsruntime\\4.6.0\\system.runtime.windowsruntime.4.6.0.nupkg.sha512",
+    "C:\\Users\\Jack\\.nuget\\packages\\system.runtime.windowsruntime.ui.xaml\\4.6.0\\system.runtime.windowsruntime.ui.xaml.4.6.0.nupkg.sha512"
+  ],
+  "logs": []
+}

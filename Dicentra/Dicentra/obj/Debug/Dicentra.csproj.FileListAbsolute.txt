@@ -1,0 +1,17 @@
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Dicentra.exe.config
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Dicentra.exe
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Dicentra.pdb
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.csprojAssemblyReference.cache
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.Properties.Resources.resources
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.csproj.GenerateResource.cache
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.csproj.CoreCompileInputs.cache
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.exe
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.pdb
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Microsoft.Toolkit.Forms.UI.Controls.WebView.dll
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Microsoft.Toolkit.Forms.UI.Controls.WebView.pdb
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.csproj.CopyComplete
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\obj\Debug\Dicentra.BrowserForm.resources
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\WebView2Loader.dll
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\Jack\local-repos\dicentra-browser\Dicentra\Dicentra\bin\Debug\Microsoft.Web.WebView2.Wpf.dll

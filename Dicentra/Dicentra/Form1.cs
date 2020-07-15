@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Forms.UI.Controls;
+using Microsoft.Web.WebView2.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace Dicentra
         private List<WebView> webViews = new List<WebView>();   // List of web views for each tab
         private WebView currentWebView = new WebView();         // Currently selected webview
 
+        private WebView2 test2 = new WebView2();
 
         public BrowserForm()
         {

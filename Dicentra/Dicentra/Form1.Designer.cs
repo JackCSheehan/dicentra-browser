@@ -214,10 +214,10 @@
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Button homeButton;
         private System.Windows.Forms.Button newTabButton;
-        private Microsoft.Toolkit.Forms.UI.Controls.WebView defaultWebView;
         private System.Windows.Forms.TextBox urlBar;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
+        private Microsoft.Toolkit.Forms.UI.Controls.WebView defaultWebView;
     }
 }
 
