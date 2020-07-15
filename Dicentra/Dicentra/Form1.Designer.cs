@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowserForm));
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -53,7 +54,7 @@
             this.controlsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlsPanel.Location = new System.Drawing.Point(0, 0);
             this.controlsPanel.Name = "controlsPanel";
-            this.controlsPanel.Size = new System.Drawing.Size(800, 50);
+            this.controlsPanel.Size = new System.Drawing.Size(800, 54);
             this.controlsPanel.TabIndex = 0;
             // 
             // tabControl
@@ -61,17 +62,17 @@
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(800, 20);
+            this.tabControl.Size = new System.Drawing.Size(800, 22);
             this.tabControl.TabIndex = 2;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(792, 0);
@@ -90,9 +91,9 @@
             this.urlPanel.Controls.Add(this.forwardButton);
             this.urlPanel.Controls.Add(this.backButton);
             this.urlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.urlPanel.Location = new System.Drawing.Point(0, 21);
+            this.urlPanel.Location = new System.Drawing.Point(0, 23);
             this.urlPanel.Name = "urlPanel";
-            this.urlPanel.Size = new System.Drawing.Size(800, 29);
+            this.urlPanel.Size = new System.Drawing.Size(800, 31);
             this.urlPanel.TabIndex = 1;
             // 
             // urlBar
@@ -113,7 +114,7 @@
             this.newTabButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.newTabButton.Location = new System.Drawing.Point(167, 3);
             this.newTabButton.Name = "newTabButton";
-            this.newTabButton.Size = new System.Drawing.Size(35, 23);
+            this.newTabButton.Size = new System.Drawing.Size(35, 25);
             this.newTabButton.TabIndex = 5;
             this.newTabButton.Text = "＋";
             this.newTabButton.UseVisualStyleBackColor = true;
@@ -126,7 +127,7 @@
             this.homeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.homeButton.Location = new System.Drawing.Point(126, 3);
             this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(35, 23);
+            this.homeButton.Size = new System.Drawing.Size(35, 25);
             this.homeButton.TabIndex = 4;
             this.homeButton.Text = "🏠";
             this.homeButton.UseVisualStyleBackColor = true;
@@ -139,7 +140,7 @@
             this.refreshButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.refreshButton.Location = new System.Drawing.Point(85, 3);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(35, 23);
+            this.refreshButton.Size = new System.Drawing.Size(35, 25);
             this.refreshButton.TabIndex = 3;
             this.refreshButton.Text = "↺";
             this.refreshButton.UseVisualStyleBackColor = true;
@@ -152,7 +153,7 @@
             this.forwardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.forwardButton.Location = new System.Drawing.Point(44, 3);
             this.forwardButton.Name = "forwardButton";
-            this.forwardButton.Size = new System.Drawing.Size(35, 23);
+            this.forwardButton.Size = new System.Drawing.Size(35, 25);
             this.forwardButton.TabIndex = 2;
             this.forwardButton.Text = "→";
             this.forwardButton.UseVisualStyleBackColor = true;
@@ -165,7 +166,7 @@
             this.backButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.backButton.Location = new System.Drawing.Point(3, 3);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(35, 23);
+            this.backButton.Size = new System.Drawing.Size(35, 25);
             this.backButton.TabIndex = 0;
             this.backButton.Text = "←";
             this.backButton.UseVisualStyleBackColor = true;
@@ -174,10 +175,10 @@
             // defaultWebView
             // 
             this.defaultWebView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.defaultWebView.Location = new System.Drawing.Point(0, 50);
-            this.defaultWebView.MinimumSize = new System.Drawing.Size(20, 20);
+            this.defaultWebView.Location = new System.Drawing.Point(0, 54);
+            this.defaultWebView.MinimumSize = new System.Drawing.Size(20, 22);
             this.defaultWebView.Name = "defaultWebView";
-            this.defaultWebView.Size = new System.Drawing.Size(800, 400);
+            this.defaultWebView.Size = new System.Drawing.Size(800, 431);
             this.defaultWebView.Source = new System.Uri("https://google.com", System.UriKind.Absolute);
             this.defaultWebView.TabIndex = 1;
             this.defaultWebView.DOMContentLoaded += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlDOMContentLoadedEventArgs>(this.browser_DOMContentLoaded);
@@ -186,11 +187,13 @@
             // 
             // BrowserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 485);
             this.Controls.Add(this.defaultWebView);
             this.Controls.Add(this.controlsPanel);
+            this.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BrowserForm";
             this.Text = "Dicentra";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BrowserForm_FormClosed);
