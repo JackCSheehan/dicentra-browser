@@ -185,13 +185,19 @@ namespace Dicentra
             if (closeTabButtonHitbox.Contains(e.Location))
             {
                 // Keep track of index of currently selected tab
-                int tabIndexBeforeRemoval = tabControl.SelectedIndex;
+                //int tabIndexBeforeRemoval = tabControl.SelectedIndex;
 
                 // Get the web view to destroy
                 WebView webViewToDestroy = webViews.ElementAt(tabControl.SelectedIndex);
 
+                // Get the tab to close
+                TabPage tabToClose = tabControl.SelectedTab;
+
+                // Once tab and webview has been removed, update selected tab
+                tabControl.SelectedIndex -= 1;
+
                 // Remove tab from tab controls
-                tabControl.TabPages.Remove(tabControl.SelectedTab);
+                tabControl.TabPages.Remove(tabToClose);
 
                 // Remove targeted webview from webview list and destroy it
                 webViews.Remove(webViewToDestroy);
@@ -205,9 +211,6 @@ namespace Dicentra
                     this.Close();
                     return;
                 }
-
-                // Once tab and webview has been removed, update selected tab
-                tabControl.SelectedIndex = tabIndexBeforeRemoval - 1;
 
                 // Update site info text
                 LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
