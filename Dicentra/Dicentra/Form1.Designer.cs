@@ -32,9 +32,9 @@
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.newTabButton = new System.Windows.Forms.Button();
             this.urlPanel = new System.Windows.Forms.Panel();
             this.urlBar = new System.Windows.Forms.TextBox();
-            this.newTabButton = new System.Windows.Forms.Button();
             this.homeButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
             this.forwardButton = new System.Windows.Forms.Button();
@@ -50,6 +50,7 @@
             // 
             this.controlsPanel.BackColor = System.Drawing.Color.Transparent;
             this.controlsPanel.Controls.Add(this.tabControl);
+            this.controlsPanel.Controls.Add(this.newTabButton);
             this.controlsPanel.Controls.Add(this.urlPanel);
             this.controlsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.controlsPanel.Location = new System.Drawing.Point(0, 0);
@@ -63,29 +64,42 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Location = new System.Drawing.Point(44, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(800, 22);
+            this.tabControl.Size = new System.Drawing.Size(715, 22);
             this.tabControl.TabIndex = 2;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.tabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDown);
             // 
             // tabPage1
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 0);
+            this.tabPage1.Size = new System.Drawing.Size(707, 0);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "New Tab";
+            this.tabPage1.Text = "New Tab ❌";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // newTabButton
+            // 
+            this.newTabButton.FlatAppearance.BorderSize = 0;
+            this.newTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newTabButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.newTabButton.Location = new System.Drawing.Point(3, 0);
+            this.newTabButton.Name = "newTabButton";
+            this.newTabButton.Size = new System.Drawing.Size(35, 25);
+            this.newTabButton.TabIndex = 5;
+            this.newTabButton.Text = "＋";
+            this.newTabButton.UseVisualStyleBackColor = true;
+            this.newTabButton.Click += new System.EventHandler(this.newTabButton_Click);
             // 
             // urlPanel
             // 
             this.urlPanel.AutoSize = true;
             this.urlPanel.BackColor = System.Drawing.Color.Transparent;
             this.urlPanel.Controls.Add(this.urlBar);
-            this.urlPanel.Controls.Add(this.newTabButton);
             this.urlPanel.Controls.Add(this.homeButton);
             this.urlPanel.Controls.Add(this.refreshButton);
             this.urlPanel.Controls.Add(this.forwardButton);
@@ -101,24 +115,11 @@
             this.urlBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.urlBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.urlBar.Location = new System.Drawing.Point(208, 3);
+            this.urlBar.Location = new System.Drawing.Point(167, 3);
             this.urlBar.Name = "urlBar";
-            this.urlBar.Size = new System.Drawing.Size(588, 23);
+            this.urlBar.Size = new System.Drawing.Size(629, 23);
             this.urlBar.TabIndex = 6;
             this.urlBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.urlBar_KeyDown);
-            // 
-            // newTabButton
-            // 
-            this.newTabButton.FlatAppearance.BorderSize = 0;
-            this.newTabButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.newTabButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.newTabButton.Location = new System.Drawing.Point(167, 3);
-            this.newTabButton.Name = "newTabButton";
-            this.newTabButton.Size = new System.Drawing.Size(35, 25);
-            this.newTabButton.TabIndex = 5;
-            this.newTabButton.Text = "＋";
-            this.newTabButton.UseVisualStyleBackColor = true;
-            this.newTabButton.Click += new System.EventHandler(this.newTabButton_Click);
             // 
             // homeButton
             // 

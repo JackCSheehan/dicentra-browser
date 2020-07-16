@@ -8,20 +8,21 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using Windows.AI.MachineLearning;
+using Windows.UI.WebUI;
 
 namespace Dicentra
 {
     public partial class BrowserForm : Form
     {
+        private const int CLOSE_TAB_BUTTON_SIZE = 15;           // Size of close tab button hitbox
 
         private String homeUrl = "https://google.com";          // URL of home page
         private int tabIndex = 0;                               // Index of currently selected tab
         private List<WebView> webViews = new List<WebView>();   // List of web views for each tab
         private WebView currentWebView = new WebView();         // Currently selected webview
-
-        private WebView2 test2 = new WebView2();
 
         public BrowserForm()
         {
@@ -34,37 +35,6 @@ namespace Dicentra
             currentWebView = defaultWebView;
         }
 
-        // Highlights home button or unhighlights it depending if the current page is the home page
-        private void highlightHomeButton()
-        {
-            // Set color of home button to be highlighted when current page is home page
-            if (currentWebView.Source.ToString() == homeUrl)
-            {
-                homeButton.BackColor = System.Drawing.Color.Orange;
-            }
-            else
-            {
-                homeButton.BackColor = System.Drawing.Color.Transparent;
-            }
-        }
-
-        // Updates text of current tab, form title, and URL bar to match the content of the current web view
-        private void updatePageTextInfo()
-        {
-            // Set form title to title of webpage
-            this.Text = currentWebView.DocumentTitle;
-
-            // Set text of url bar to be current page's title
-            urlBar.Text = currentWebView.Source.ToString();
-
-            // Unfocus url bar once content is loaded
-            this.ActiveControl = null;
-
-            // Change text of current tab to be the name of the current webview
-            tabControl.SelectedTab.Text = currentWebView.DocumentTitle;
-
-            highlightHomeButton();
-        }
 
         private void backButton_Click(object sender, EventArgs e)
         {
@@ -92,7 +62,7 @@ namespace Dicentra
             else if (e.Button == MouseButtons.Right)
             {
                 homeUrl = currentWebView.Source.ToString();
-                highlightHomeButton();
+                LogicHelper.highlightHomeButton(currentWebView, homeButton, homeUrl);
             }
         }
 
@@ -119,7 +89,7 @@ namespace Dicentra
                     currentWebView.Navigate(urlBarText);
 
                 }
-                catch (Exception) { }
+                catch (Exception) {}
             }
         }
 
@@ -129,15 +99,21 @@ namespace Dicentra
             // Unfocus url bar once content is loaded
             this.ActiveControl = currentWebView;
 
-            updatePageTextInfo();
+            LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
         }
 
         private void browser_NavigationStarting(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationStartingEventArgs e)
         {
             // Set title of form and current tab to loading to indicate that the current page is loading
-            this.Text = "Loading...";
-            tabControl.SelectedTab.Text = "Loading...";
+            this.Text = "Loading... ❌";
+            tabControl.SelectedTab.Text = "Loading... ❌";
 
+        }
+
+        // Once page nagivation has started, update page text info
+        private void browser_NavigationCompleted(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs e)
+        {
+            LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
         }
 
         private void tabsPanel_Paint(object sender, PaintEventArgs e) {}
@@ -145,10 +121,15 @@ namespace Dicentra
         // Handler for adding a new tab to browser.
         private void newTabButton_Click(object sender, EventArgs e)
         {
+            // Add a new tab to the tab control
+            TabPage newTabPage = new TabPage("New Tab ❌");
+            tabControl.TabPages.Add(newTabPage);
+
             // Create new webview and set its settings
             WebView newWebView = new WebView();
             newWebView.Source = new Uri(homeUrl);
             newWebView.Dock = DockStyle.Fill;
+            newWebView.Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
             // Add event handlers to new webview
             newWebView.NavigationCompleted += new EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs>(browser_NavigationCompleted);
@@ -158,9 +139,7 @@ namespace Dicentra
             // Add the new web view to the web view list
             webViews.Add(newWebView);
 
-            // Add and select a new tab to the tab control
-            TabPage newTabPage = new TabPage("New Tab");
-            tabControl.TabPages.Add(newTabPage);
+            // Select the new tab
             tabControl.SelectedTab = newTabPage;
 
             // Change tab index to correspond to selected index of tab control
@@ -177,6 +156,12 @@ namespace Dicentra
             // Update tab index
             tabIndex = tabControl.SelectedIndex;
 
+            // If user tries to remove the last tab, the selected tab should move right
+            if (tabIndex < 0)
+            {
+                tabIndex = 0;
+            }
+
             // Update current web view when user changes tab
             currentWebView = webViews.ElementAt(tabIndex);
 
@@ -184,13 +169,52 @@ namespace Dicentra
             currentWebView.BringToFront();
 
             // Update page text  info when tab has been changed
-            updatePageTextInfo();
+            LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
         }
 
-        // Once page nagivation has started, update page text info
-        private void browser_NavigationCompleted(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs e)
+        // Handler for when user clicks on tab control (used for detecting click to close tab)
+        private void tabControl_MouseDown(object sender, MouseEventArgs e)
         {
-            updatePageTextInfo();
+            // Get rectangle of selected tab
+            Rectangle selectedTabRectangle = tabControl.GetTabRect(tabControl.SelectedIndex);
+
+            // Define hitbox of close tab button
+            Rectangle closeTabButtonHitbox = new Rectangle(selectedTabRectangle.Right - CLOSE_TAB_BUTTON_SIZE, selectedTabRectangle.Top, CLOSE_TAB_BUTTON_SIZE, CLOSE_TAB_BUTTON_SIZE);
+
+            // Check to see if user clicked in hitbox of close tab button
+            if (closeTabButtonHitbox.Contains(e.Location))
+            {
+                // Keep track of index of currently selected tab
+                int tabIndexBeforeRemoval = tabControl.SelectedIndex;
+
+                // Get the web view to destroy
+                WebView webViewToDestroy = webViews.ElementAt(tabControl.SelectedIndex);
+
+                // Remove tab from tab controls
+                tabControl.TabPages.Remove(tabControl.SelectedTab);
+
+                // Remove targeted webview from webview list and destroy it
+                webViews.Remove(webViewToDestroy);
+                LogicHelper.destroyWebView(webViewToDestroy);
+                this.Controls.Remove(webViewToDestroy);
+
+                // If user removed the last tab, close the form
+                if (webViews.Count == 0)
+                {
+                    this.Dispose();
+                    this.Close();
+                    return;
+                }
+
+                // Once tab and webview has been removed, update selected tab
+                tabControl.SelectedIndex = tabIndexBeforeRemoval - 1;
+
+                // Update site info text
+                LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
+
+                // Change current web view to be the newly selected tab
+                currentWebView = webViews.ElementAt(tabIndex);
+            }
         }
 
         // Handler for when form is closed
@@ -199,9 +223,7 @@ namespace Dicentra
             // Go through each webview and destroy it
             foreach (WebView webView in webViews)
             {
-                // Stop all navigation and downloads and then dispose the web view
-                webView.Stop();
-                webView.Dispose();
+                LogicHelper.destroyWebView(webView);
             }
         }
     }
