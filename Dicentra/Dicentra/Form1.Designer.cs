@@ -34,6 +34,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.newTabButton = new System.Windows.Forms.Button();
             this.urlPanel = new System.Windows.Forms.Panel();
+            this.fullscreenButton = new System.Windows.Forms.Button();
+            this.stopButton = new System.Windows.Forms.Button();
             this.urlBar = new System.Windows.Forms.TextBox();
             this.homeButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
@@ -99,6 +101,8 @@
             // 
             this.urlPanel.AutoSize = true;
             this.urlPanel.BackColor = System.Drawing.Color.Transparent;
+            this.urlPanel.Controls.Add(this.fullscreenButton);
+            this.urlPanel.Controls.Add(this.stopButton);
             this.urlPanel.Controls.Add(this.urlBar);
             this.urlPanel.Controls.Add(this.homeButton);
             this.urlPanel.Controls.Add(this.refreshButton);
@@ -110,14 +114,40 @@
             this.urlPanel.Size = new System.Drawing.Size(800, 31);
             this.urlPanel.TabIndex = 1;
             // 
+            // fullscreenButton
+            // 
+            this.fullscreenButton.FlatAppearance.BorderSize = 0;
+            this.fullscreenButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fullscreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.fullscreenButton.Location = new System.Drawing.Point(208, 3);
+            this.fullscreenButton.Name = "fullscreenButton";
+            this.fullscreenButton.Size = new System.Drawing.Size(35, 25);
+            this.fullscreenButton.TabIndex = 8;
+            this.fullscreenButton.Text = "⛶";
+            this.fullscreenButton.UseVisualStyleBackColor = true;
+            this.fullscreenButton.Click += new System.EventHandler(this.fullscreenButton_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.FlatAppearance.BorderSize = 0;
+            this.stopButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.stopButton.Location = new System.Drawing.Point(126, 2);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(35, 25);
+            this.stopButton.TabIndex = 7;
+            this.stopButton.Text = "x";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
             // urlBar
             // 
             this.urlBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.urlBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.urlBar.Location = new System.Drawing.Point(167, 3);
+            this.urlBar.Location = new System.Drawing.Point(249, 5);
             this.urlBar.Name = "urlBar";
-            this.urlBar.Size = new System.Drawing.Size(629, 23);
+            this.urlBar.Size = new System.Drawing.Size(547, 23);
             this.urlBar.TabIndex = 6;
             this.urlBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.urlBar_KeyDown);
             // 
@@ -126,7 +156,7 @@
             this.homeButton.FlatAppearance.BorderSize = 0;
             this.homeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.homeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.homeButton.Location = new System.Drawing.Point(126, 3);
+            this.homeButton.Location = new System.Drawing.Point(167, 3);
             this.homeButton.Name = "homeButton";
             this.homeButton.Size = new System.Drawing.Size(35, 25);
             this.homeButton.TabIndex = 4;
@@ -222,6 +252,8 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private Microsoft.Toolkit.Forms.UI.Controls.WebView defaultWebView;
+        private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Button fullscreenButton;
     }
 }
 

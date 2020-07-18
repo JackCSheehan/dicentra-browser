@@ -19,10 +19,13 @@ namespace Dicentra
     {
         private const int CLOSE_TAB_BUTTON_SIZE = 15;           // Size of close tab button hitbox
 
-        private String homeUrl = "https://google.com";          // URL of home page
-        private int tabIndex = 0;                               // Index of currently selected tab
         private List<WebView> webViews = new List<WebView>();   // List of web views for each tab
         private WebView currentWebView = new WebView();         // Currently selected webview
+
+        private String homeUrl = "https://google.com";          // URL of home page
+        private int tabIndex = 0;                               // Index of currently selected tab
+        private int previousTabIndex = 0;                       // Index of previously selected tab
+        private bool isFullscreen = false;                      // Flag that keeps track of whether or not window is fullscreen
 
         public BrowserForm()
         {
@@ -49,6 +52,36 @@ namespace Dicentra
         private void refreshButton_Click(object sender, EventArgs e)
         {
             currentWebView.Refresh();
+        }
+
+        // Handler for when stop button is clicked.
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            currentWebView.Stop();
+        }
+
+        // Handler for when the fullscreen button is clicked.
+        private void fullscreenButton_Click(object sender, EventArgs e)
+        {
+            // Check state of isFullscreen flag to determine if window should be made normal or full screen
+            if (isFullscreen)
+            {
+                // Remove window border, move it to the top, and maximize it
+                this.TopMost = true;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Maximized;
+            }
+            // If the fullscreen flag is false and the border is not already sizable, make the window not fullscreen
+            else if (this.FormBorderStyle != FormBorderStyle.Sizable)
+            {
+                // Add back in normal window border and change top most to false
+                this.TopMost = false;
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.WindowState = FormWindowState.Normal;
+            }
+
+            // Toggle fullscreen flag
+            isFullscreen = !isFullscreen;
         }
 
         private void homeButton_MouseDown(object sender, MouseEventArgs e)
@@ -99,7 +132,7 @@ namespace Dicentra
             // Unfocus url bar once content is loaded
             this.ActiveControl = currentWebView;
 
-            LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
+            LogicHelper.updatePageTextInfo(this, (WebView)sender, webViews.IndexOf((WebView)sender), urlBar, tabControl, homeButton, homeUrl); ;
         }
 
         private void browser_NavigationStarting(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationStartingEventArgs e)
@@ -107,13 +140,12 @@ namespace Dicentra
             // Set title of form and current tab to loading to indicate that the current page is loading
             this.Text = "Loading... ❌";
             tabControl.SelectedTab.Text = "Loading... ❌";
-
         }
 
         // Once page nagivation has started, update page text info
         private void browser_NavigationCompleted(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs e)
         {
-            LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
+            LogicHelper.updatePageTextInfo(this, (WebView) sender, webViews.IndexOf((WebView)sender), urlBar, tabControl, homeButton, homeUrl);
         }
 
         private void tabsPanel_Paint(object sender, PaintEventArgs e) {}
@@ -143,6 +175,7 @@ namespace Dicentra
             tabControl.SelectedTab = newTabPage;
 
             // Change tab index to correspond to selected index of tab control
+            previousTabIndex = tabIndex;
             tabIndex = tabControl.SelectedIndex;
 
             // Add the new tab web view and bring it to the front
@@ -154,6 +187,7 @@ namespace Dicentra
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Update tab index
+            previousTabIndex = tabIndex;
             tabIndex = tabControl.SelectedIndex;
 
             // If user tries to remove the last tab, the selected tab should move right
@@ -169,7 +203,7 @@ namespace Dicentra
             currentWebView.BringToFront();
 
             // Update page text  info when tab has been changed
-            LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
+            LogicHelper.updatePageTextInfo(this, currentWebView, webViews.IndexOf(currentWebView), urlBar, tabControl, homeButton, homeUrl);
         }
 
         // Handler for when user clicks on tab control (used for detecting click to close tab)
@@ -184,17 +218,14 @@ namespace Dicentra
             // Check to see if user clicked in hitbox of close tab button
             if (closeTabButtonHitbox.Contains(e.Location))
             {
-                // Keep track of index of currently selected tab
-                //int tabIndexBeforeRemoval = tabControl.SelectedIndex;
-
                 // Get the web view to destroy
                 WebView webViewToDestroy = webViews.ElementAt(tabControl.SelectedIndex);
 
                 // Get the tab to close
                 TabPage tabToClose = tabControl.SelectedTab;
 
-                // Once tab and webview has been removed, update selected tab
                 tabControl.SelectedIndex -= 1;
+                
 
                 // Remove tab from tab controls
                 tabControl.TabPages.Remove(tabToClose);
@@ -213,7 +244,7 @@ namespace Dicentra
                 }
 
                 // Update site info text
-                LogicHelper.updatePageTextInfo(this, currentWebView, urlBar, tabControl, homeButton, homeUrl);
+                LogicHelper.updatePageTextInfo(this, currentWebView, webViews.IndexOf(currentWebView), urlBar, tabControl, homeButton, homeUrl);
 
                 // Change current web view to be the newly selected tab
                 currentWebView = webViews.ElementAt(tabIndex);
