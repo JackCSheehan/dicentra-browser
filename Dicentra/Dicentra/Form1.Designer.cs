@@ -212,6 +212,7 @@
             this.defaultWebView.Size = new System.Drawing.Size(800, 431);
             this.defaultWebView.Source = new System.Uri("https://google.com", System.UriKind.Absolute);
             this.defaultWebView.TabIndex = 1;
+            this.defaultWebView.ContainsFullScreenElementChanged += new System.EventHandler<object>(this.browser_ContainsFullScreenElementChanged);
             this.defaultWebView.DOMContentLoaded += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlDOMContentLoadedEventArgs>(this.browser_DOMContentLoaded);
             this.defaultWebView.NavigationCompleted += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs>(this.browser_NavigationCompleted);
             this.defaultWebView.NavigationStarting += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationStartingEventArgs>(this.browser_NavigationStarting);
@@ -220,11 +221,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 485);
             this.Controls.Add(this.defaultWebView);
             this.Controls.Add(this.controlsPanel);
             this.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "BrowserForm";
             this.Text = "Dicentra";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BrowserForm_FormClosed);
