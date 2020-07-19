@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowserForm));
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -42,6 +43,7 @@
             this.forwardButton = new System.Windows.Forms.Button();
             this.backButton = new System.Windows.Forms.Button();
             this.defaultWebView = new Microsoft.Toolkit.Forms.UI.Controls.WebView();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.controlsPanel.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.urlPanel.SuspendLayout();
@@ -94,6 +96,7 @@
             this.newTabButton.Size = new System.Drawing.Size(35, 25);
             this.newTabButton.TabIndex = 5;
             this.newTabButton.Text = "＋";
+            this.toolTip.SetToolTip(this.newTabButton, "New Tab");
             this.newTabButton.UseVisualStyleBackColor = true;
             this.newTabButton.Click += new System.EventHandler(this.newTabButton_Click);
             // 
@@ -124,6 +127,7 @@
             this.fullscreenButton.Size = new System.Drawing.Size(35, 25);
             this.fullscreenButton.TabIndex = 8;
             this.fullscreenButton.Text = "⛶";
+            this.toolTip.SetToolTip(this.fullscreenButton, "Full Screen");
             this.fullscreenButton.UseVisualStyleBackColor = true;
             this.fullscreenButton.Click += new System.EventHandler(this.fullscreenButton_Click);
             // 
@@ -137,6 +141,7 @@
             this.stopButton.Size = new System.Drawing.Size(35, 25);
             this.stopButton.TabIndex = 7;
             this.stopButton.Text = "x";
+            this.toolTip.SetToolTip(this.stopButton, "Stop");
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
@@ -149,6 +154,7 @@
             this.urlBar.Name = "urlBar";
             this.urlBar.Size = new System.Drawing.Size(547, 23);
             this.urlBar.TabIndex = 6;
+            this.toolTip.SetToolTip(this.urlBar, "URL or Google Search");
             this.urlBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.urlBar_KeyDown);
             // 
             // homeButton
@@ -161,6 +167,7 @@
             this.homeButton.Size = new System.Drawing.Size(35, 25);
             this.homeButton.TabIndex = 4;
             this.homeButton.Text = "🏠";
+            this.toolTip.SetToolTip(this.homeButton, "Home");
             this.homeButton.UseVisualStyleBackColor = true;
             this.homeButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.homeButton_MouseDown);
             // 
@@ -174,6 +181,7 @@
             this.refreshButton.Size = new System.Drawing.Size(35, 25);
             this.refreshButton.TabIndex = 3;
             this.refreshButton.Text = "↺";
+            this.toolTip.SetToolTip(this.refreshButton, "Refresh");
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
@@ -187,6 +195,7 @@
             this.forwardButton.Size = new System.Drawing.Size(35, 25);
             this.forwardButton.TabIndex = 2;
             this.forwardButton.Text = "→";
+            this.toolTip.SetToolTip(this.forwardButton, "Forward");
             this.forwardButton.UseVisualStyleBackColor = true;
             this.forwardButton.Click += new System.EventHandler(this.forwardButton_Click);
             // 
@@ -200,6 +209,7 @@
             this.backButton.Size = new System.Drawing.Size(35, 25);
             this.backButton.TabIndex = 0;
             this.backButton.Text = "←";
+            this.toolTip.SetToolTip(this.backButton, "Back");
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
@@ -257,6 +267,7 @@
         private Microsoft.Toolkit.Forms.UI.Controls.WebView defaultWebView;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button fullscreenButton;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

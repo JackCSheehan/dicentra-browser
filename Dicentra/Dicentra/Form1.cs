@@ -22,10 +22,14 @@ namespace Dicentra
 
         private List<WebView> webViews = new List<WebView>();   // List of web views for each tab
         private WebView currentWebView = new WebView();         // Currently selected webview
+
         private int previousTabIndex = 0;                       // Index of previous tab
-        private String homeUrl = "https://google.com";          // URL of home page
         private int tabIndex = 0;                               // Index of currently selected tab
+        
         private bool isFullScreen = false;                      // Flag that keeps track of whether or not window is fullscreen
+
+        private String homeUrl = "https://google.com";          // URL of home page
+        private String searchUrl = "https://google.com";        // URL of default search engine
 
         private Timer inputTimer = new Timer();                 // Timer used to get inputs for controls that don't support mouse/key events
 
@@ -91,25 +95,35 @@ namespace Dicentra
             // If the user pressed enter, change browser url to what they typed
             if (e.KeyCode == Keys.Enter)
             {
+                // Get text from URL bar
+                String urlBarText = urlBar.Text;
+
                 // Use Try/Catch to prevent crash on invalid URL
                 try
                 {
-                    String urlBarText = urlBar.Text;
+                    String formattedURL = urlBarText;   // Variable to hold URL input with added protocol if none was added originally
 
                     // If there is no HTTP or HTTPS protocol, add https protocol
                     if (!urlBarText.StartsWith("http://") && !urlBarText.StartsWith("https://"))
                     {
-                        urlBarText = "https://" + urlBarText;
+                        formattedURL = "https://" + urlBarText;
                     }
 
+                    // Try to create a new URI object using URL bar input; throws exception if invalid
+                    new Uri(formattedURL);
+
                     //Set url bar text to be the corrected url
-                    urlBar.Text = urlBarText;
+                    urlBar.Text = formattedURL;
 
                     // Set browser URL to the validated text put into the URL bar
-                    currentWebView.Navigate(urlBarText);
+                    currentWebView.Navigate(formattedURL);
 
                 }
-                catch (Exception) {}
+                // If URL cannot be resolved, send text to google search
+                catch (Exception) 
+                {
+                    currentWebView.Navigate(searchUrl + "/search?q=" + urlBarText);
+                }
             }
         }
 
