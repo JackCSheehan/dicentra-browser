@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -98,29 +99,23 @@ namespace Dicentra
                 // Get text from URL bar
                 String urlBarText = urlBar.Text;
 
-                // Use Try/Catch to prevent crash on invalid URL
-                try
+                // Check to see if the input is valid
+                if (LogicHelper.isValidURL(urlBarText))
                 {
-                    String formattedURL = urlBarText;   // Variable to hold URL input with added protocol if none was added originally
-
                     // If there is no HTTP or HTTPS protocol, add https protocol
                     if (!urlBarText.StartsWith("http://") && !urlBarText.StartsWith("https://"))
                     {
-                        formattedURL = "https://" + urlBarText;
+                        urlBarText = "https://" + urlBarText;
                     }
 
-                    // Try to create a new URI object using URL bar input; throws exception if invalid
-                    new Uri(formattedURL);
-
-                    //Set url bar text to be the corrected url
-                    urlBar.Text = formattedURL;
+                    //If input is a URI, set url bar text to be the corrected url
+                    urlBar.Text = urlBarText;
 
                     // Set browser URL to the validated text put into the URL bar
-                    currentWebView.Navigate(formattedURL);
-
+                    currentWebView.Navigate(urlBarText);
                 }
-                // If URL cannot be resolved, send text to google search
-                catch (Exception) 
+                // If input is not a Uri, re-route input to default search
+                else
                 {
                     currentWebView.Navigate(searchUrl + "/search?q=" + urlBarText);
                 }

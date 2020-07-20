@@ -149,12 +149,17 @@
             // 
             this.urlBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.urlBar.AutoCompleteCustomSource.AddRange(new string[] {
+            "January",
+            "February"});
+            this.urlBar.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.urlBar.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.urlBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.urlBar.Location = new System.Drawing.Point(249, 5);
             this.urlBar.Name = "urlBar";
             this.urlBar.Size = new System.Drawing.Size(547, 23);
             this.urlBar.TabIndex = 6;
-            this.toolTip.SetToolTip(this.urlBar, "URL or Google Search");
+            this.toolTip.SetToolTip(this.urlBar, "URL or Search Query");
             this.urlBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.urlBar_KeyDown);
             // 
             // homeButton
